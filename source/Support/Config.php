@@ -11,7 +11,8 @@ define("CONF_DB_NAME", "fsphp");
 /**
  * PROJECT URLs
  */
-define("CONF_URL_BASE", "https://www.localhost/ProjectX");
+define("CONF_URL_BASE", "https://www.projectX/coffeControl.com");
+define("CONF_URL_TEST", "https://www.localhost/ProjectX");
 define("CONF_URL_ADMIN", "/admin");
 
 /**
@@ -60,6 +61,7 @@ define("CONF_MESSAGE_ERROR", "error");
  */
 define("CONF_VIEW_PATH", __DIR__ . "/../../assets/views");
 define("CONF_VIEW_EXT", "php");
+define("CONF_VIEW_THEME", "coffeControl");
 
 /**
  * UPLOADS
