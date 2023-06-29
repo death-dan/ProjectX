@@ -28,10 +28,12 @@ define("CONF_SITE_DOMAIN", "www.localhost");
 define("CONF_SOCIAL_TWITER_CREATOR", "");
 define("CONF_SOCIAL_TWITER_PUBLISHER", "");
 define("CONF_SOCIAL_FACEBOOK_APP", "");
-define("CONF_SOCIAL_FACEBOOK_PAGE", "");
+define("CONF_SOCIAL_FACEBOOK_PAGE", "facebook");
 define("CONF_SOCIAL_FACEBOOK_AUTHOR", "");
 define("CONF_SOCIAL_GOGGLE_PAGE", "");
 define("CONF_SOCIAL_GOGGLE_AUTHOR", "");
+define("CONF_SOCIAL_INSTAGRAM_PAGE", "instagram");
+define("CONF_SOCIAL_YOUTUBE_PAGE", "youtube ");
 
 /**
  * DATES

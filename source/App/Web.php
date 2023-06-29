@@ -13,12 +13,15 @@ class Web extends Controller
 
     public function home()
     {
-        echo "<h1>HELLO WORLD!</h1>";
+        echo $this->view->render("home", [
+            "title" => "CoffeControl - Gerencie suas contas com o melhor coffe"
+        ]);
     }
 
     public function error(array $data)
     {
-        echo "<h1>ERROR !</h1>";
-        var_dump($data);
+        echo $this->view->render("error", [
+            "title" => "{$data['errcode']} | Ops!"
+        ]);
     }
 }
