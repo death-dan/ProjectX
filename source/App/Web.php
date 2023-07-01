@@ -5,13 +5,23 @@ namespace Source\App;
 use Source\Core\Controller;
 
 class Web extends Controller
-{
+{    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/");
     }
-
-    public function home()
+    
+    /**
+     * home
+     *
+     * @return void
+     */
+    public function home(): void
     {
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
@@ -23,6 +33,40 @@ class Web extends Controller
         echo $this->view->render("home", [
             "head" => $head,
             "video" => "jGQBmSsunT4"
+        ]);
+    }
+    
+    /**
+     * about
+     *
+     * @return void
+     */
+    public function about(): void
+    {
+        $head = $this->seo->render(
+            "Descubra o " . CONF_SITE_NAME . " - " . CONF_SITE_DESC,
+            CONF_SITE_DESC,
+            url("/sobre"),
+            url("/assets/images/share.jpg")
+        );
+
+        echo $this->view->render("about", [
+            "head" => $head,
+            "video" => "jGQBmSsunT4"
+        ]);
+    }
+
+    public function terms(): void
+    {
+        $head = $this->seo->render(
+            CONF_SITE_NAME . " - Termos de uso",
+            CONF_SITE_DESC,
+            url("/termos"),
+            url("/assets/images/share.jpg")
+        );
+
+        echo $this->view->render("terms", [
+            "head" => $head
         ]);
     }
 

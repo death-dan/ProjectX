@@ -18,6 +18,7 @@ $route  = new Router(url(), ":");
 $route->namespace("Source\App");
 $route->get("/", "web:home");
 $route->get("/sobre", "web:about");
+$route->get("/termos", "web:terms");
 
 /** 
  * ERROR ROUTES
