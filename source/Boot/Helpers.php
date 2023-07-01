@@ -230,6 +230,16 @@ function url(string $path = null): string
 }
 
 /**
+ * url_back
+ *
+ * @return string
+ */
+function url_back(): string
+{
+    return ($_SERVER['HTTP_REFERER'] ?? url());
+}
+
+/**
  * theme
  *
  * @param  mixed $path

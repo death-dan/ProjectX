@@ -1,3 +1,5 @@
+<?php $this->layout("_theme"); ?>
+
 <article class="auth">
     <div class="auth_content container content">
         <header class="auth_header">
@@ -9,7 +11,7 @@
             <label>
                 <div class="unlock-alt">
                     <span class="icon-envelope">Email:</span>
-                    <span><a title="Recuperar senha" href="?file=auth-login">Voltar e entrar!</a></span>
+                    <span><a title="Recuperar senha" href="<?= url("/entrar"); ?>">Voltar e entrar!</a></span>
                 </div>
                 <input type="email" name="email" placeholder="Informe seu e-mail:"/>
             </label>
@@ -18,5 +20,3 @@
         </form>
     </div>
 </article>
-
-<?php require __DIR__ . "/optout.php"; ?>

@@ -18,7 +18,9 @@ define("CONF_URL_ADMIN", "/admin");
 /**
  * SITE
  */
-define("CONF_SITE_NAME", "LocalHost");
+define("CONF_SITE_NAME", "CoffeControl");
+define("CONF_SITE_TITLE", "Gerencie suas contas com o melhor coffe ");
+define("CONF_SITE_DESC", "O CoffeControl é um gerenciador de contas simples, poderoso e gratuito.");
 define("CONF_SITE_LANG", "pt-br");
 define("CONF_SITE_DOMAIN", "www.localhost");
 

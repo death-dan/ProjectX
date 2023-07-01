@@ -1,3 +1,5 @@
+<?php $v->layout("_theme"); ?>
+
 <article class="terms_page">
     <header class="terms_page_header">
         <h1>Termos de uso CaféControl</h1>
@@ -139,6 +141,3 @@
                 qualquer material que possa violar esse Termo de Uso.</p>
         </div>
 </article>
-
-<!--OPT OUT-->
-<?php require __DIR__ . "/optout.php"; ?>

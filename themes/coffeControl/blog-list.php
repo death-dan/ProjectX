@@ -1,5 +1,7 @@
 <article class="blog_article">
-    <a title="Post" href="<?= url("/blog/titulo-post"); ?>"><img title="Blog" alt="Blog" src="<?= theme("/assets/images/home-featured.jpg"); ?>"/></a>
+    <a title="Post" href="<?= url("/blog/titulo-post"); ?>">
+        <img title="Blog" alt="Blog" src="<?= theme("/assets/images/home-featured.jpg"); ?>"/>
+    </a>
     <header>
         <p class="meta">Blog &bull; Por Robson V. Leite &bull; 22/12/18 23h23</p>
         <h2><a title="Post" href="<?= url("/blog/titulo-post"); ?>">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>

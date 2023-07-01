@@ -31,12 +31,11 @@ if (strpos(url(), "localhost")) {
     $jsDir = scandir(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/assets/js");
     foreach($jsDir as $js) {
         $jsFile = __DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/assets/js/{$js}";
-        var_dump(pathinfo($jsFile)['extension'], is_file($jsFile));
         if (is_file($jsFile) && pathinfo($jsFile)['extension'] == "js") {
             $minJS->add($jsFile);
         }
     }
 
     // minify JS
-    $minJS->minify(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/assets/scripts.css");
+    $minJS->minify(__DIR__ . "/../../themes/" . CONF_VIEW_THEME . "/assets/scripts.js");
 }

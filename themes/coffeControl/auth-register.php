@@ -1,8 +1,10 @@
+<?php $v->layout("_theme"); ?>
+
 <article class="auth">
     <div class="auth_content container content">
         <header class="auth_header">
             <h1>Cadastre-se</h1>
-            <p>Já tem uma conta? <a title="Entrar" href="?file=auth-login">Fazer login!</a></p>
+            <p>Já tem uma conta? <a title="Entrar" href="<?= url("/entrar"); ?>">Fazer login!</a></p>
         </header>
 
         <form class="auth_form" action="" method="post" enctype="multipart/form-data">
@@ -30,5 +32,3 @@
         </form>
     </div>
 </article>
-
-<?php require __DIR__ . "/optout.php"; ?>
