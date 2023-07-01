@@ -23,8 +23,8 @@ class Seo
             CONF_SITE_LANG,
             $schema
         )->twitterCard(
-            CONF_SOCIAL_TWITER_CREATOR,
-            CONF_SOCIAL_TWITER_PUBLISHER,
+            CONF_SOCIAL_TWITTER_CREATOR,
+            CONF_SOCIAL_TWITTER_PUBLISHER,
             CONF_SITE_DOMAIN
         )->publisher(
             "localHost",

@@ -27,8 +27,8 @@ define("CONF_SITE_DOMAIN", "www.localhost");
 /**
  * SOCIAL
  */
-define("CONF_SOCIAL_TWITER_CREATOR", "");
-define("CONF_SOCIAL_TWITER_PUBLISHER", "");
+define("CONF_SOCIAL_TWITTER_CREATOR", "");
+define("CONF_SOCIAL_TWITTER_PUBLISHER", "");
 define("CONF_SOCIAL_FACEBOOK_APP", "");
 define("CONF_SOCIAL_FACEBOOK_PAGE", "facebook");
 define("CONF_SOCIAL_FACEBOOK_AUTHOR", "");

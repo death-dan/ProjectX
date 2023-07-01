@@ -1,4 +1,4 @@
-<?php $v->layout("_theme"); ?>
+<?php $this->layout("_theme"); ?>
 
     <article class="post_page">
         <header class="post_page_header">
@@ -110,7 +110,7 @@
 
                 <div class="blog_articles">
                     <?php for ($i = 0; $i <= 2; $i++): ?>
-                        <?php $v->insert("blog-list"); ?>
+                        <?php $this->insert("blog-list"); ?>
                     <?php endfor; ?>
                 </div>
             </section>
@@ -118,7 +118,7 @@
     </article>
 
 
-<?php $v->start("scripts"); ?>
+<?php $this->start("scripts"); ?>
 <div id="fb-root"></div>
 <script>(function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -130,4 +130,4 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<?php $v->end(); ?>
+<?php $this->end(); ?>

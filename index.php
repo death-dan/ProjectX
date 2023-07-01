@@ -20,6 +20,10 @@ $route->get("/", "web:home");
 $route->get("/sobre", "web:about");
 $route->get("/termos", "web:terms");
 
+$route->get("/blog", "web:blog");
+    $route->get("/blog/page/{page}", "web:blog");
+    $route->get("/blog/{postName}", "web:blogPost");
+
 /** 
  * ERROR ROUTES
  */
