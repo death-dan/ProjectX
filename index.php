@@ -20,9 +20,15 @@ $route->get("/", "web:home");
 $route->get("/sobre", "web:about");
 $route->get("/termos", "web:terms");
 
+//blog
 $route->get("/blog", "web:blog");
-    $route->get("/blog/page/{page}", "web:blog");
-    $route->get("/blog/{postName}", "web:blogPost");
+$route->get("/blog/page/{page}", "web:blog");
+$route->get("/blog/{postName}", "web:blogPost");
+
+//auth
+$route->get("/entrar", "web:login");
+$route->get("/recuperar", "web:forget");
+$route->get("/cadastrar", "web:register");
 
 /** 
  * ERROR ROUTES
