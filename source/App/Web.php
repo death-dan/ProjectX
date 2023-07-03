@@ -6,6 +6,7 @@ use League\Plates\Template\Func;
 use League\Plates\Template\Functions;
 use Source\Core\Connect;
 use Source\Core\Controller;
+use Source\Models\User;
 use Source\Support\Pager;
 
 class Web extends Controller
@@ -27,6 +28,8 @@ class Web extends Controller
      */
     public function home(): void
     {
+        $user = (new User())->findById(1);
+        var_dump($user);
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
