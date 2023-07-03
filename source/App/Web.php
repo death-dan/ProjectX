@@ -2,11 +2,9 @@
 
 namespace Source\App;
 
-use League\Plates\Template\Func;
-use League\Plates\Template\Functions;
-use Source\Core\Connect;
 use Source\Core\Controller;
-use Source\Models\User;
+use Source\Models\Faq\Channel;
+use Source\Models\Faq\Question;
 use Source\Support\Pager;
 
 class Web extends Controller
@@ -28,8 +26,6 @@ class Web extends Controller
      */
     public function home(): void
     {
-        $user = (new User())->findById(1);
-        var_dump($user);
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
@@ -59,7 +55,11 @@ class Web extends Controller
 
         echo $this->view->render("about", [
             "head" => $head,
-            "video" => "jGQBmSsunT4"
+            "video" => "jGQBmSsunT4",
+            "faq" => (new Question())
+                ->find("channel_id = :id", "id=1", "question, response")
+                ->order("order_by")
+                ->fetch(true)
         ]);
     }
     

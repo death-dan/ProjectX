@@ -6,15 +6,6 @@ use Source\Core\Model;
 
 class User extends Model
 {
-    /** @var array $safe no update or create*/
-    protected static $safe = ["id", "created_at", "updated_at"];
-
-    /** @var string $entity database table */
-    protected static $entity = "users";
-
-    /** @var array $required table fields */
-    protected static $required = ["first_name", "last_name", "email", "password"];
-    
     /**
      * __construct
      *
@@ -49,20 +40,6 @@ class User extends Model
         $this->document = $document;
 
         return $this;
-    }
-
-    
-    /**
-     * findById
-     *
-     * @param  mixed $id
-     * @param  mixed $columns
-     * @return User|null
-     */
-    public function findById(int $id, string $columns = "*"): ?User
-    {
-        $find = $this->find("id = :id", "id={$id}", $columns);
-        return $find->fetch();
     }
     
     /**

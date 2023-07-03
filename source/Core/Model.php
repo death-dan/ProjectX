@@ -2,7 +2,6 @@
 
 namespace Source\Core;
 
-use PSpell\Config;
 use Source\Support\Message;
 
 abstract class Model
@@ -30,12 +29,25 @@ abstract class Model
 
     /** @var int */
     protected $offset;
+
+    /** @var string $entity database table */
+    protected static $entity;
+
+    /** @var array $protected no update or create */
+    protected static $protected;
+
+    /** @var array $entity database table */
+    protected static $required;
     
     /**
      * Model constructor
      */
-    public function __construct()
+    public function __construct(string $entity, array $protected, array $required)
     {
+        self::$entity = $entity;
+        self::$protected = array_merge($protected, ['created_at', "updated_at"]);
+        self::$required = $required;
+        
         $this->message = new Message();
     }
     
@@ -107,6 +119,19 @@ abstract class Model
         $this->query = "SELECT {$columns} FROM " . static::$entity;
         return $this;
     }
+
+     /**
+     * findById
+     *
+     * @param  mixed $id
+     * @param  mixed $columns
+     * @return null|mixed|Model
+     */
+    public function findById(int $id, string $columns = "*"): ?Model
+    {
+        $find = $this->find("id = :id", "id={$id}", $columns);
+        return $find->fetch();
+    }
     
     /**
      * order
@@ -116,7 +141,7 @@ abstract class Model
      */
     public function order(string $columnOrder): Model
     {
-        $this->order = " ORDER {$columnOrder}";
+        $this->order = " ORDER BY {$columnOrder}";
         return $this;
     }
     
