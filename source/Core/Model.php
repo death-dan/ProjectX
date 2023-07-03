@@ -288,7 +288,7 @@ abstract class Model
     protected function safe(): ?array
     {
         $safe = (array)$this->data;
-        foreach(static::$safe as $unset) {
+        foreach(static::$protected as $unset) {
             unset($safe[$unset]);
         }
 

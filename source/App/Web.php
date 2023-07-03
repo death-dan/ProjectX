@@ -3,8 +3,9 @@
 namespace Source\App;
 
 use Source\Core\Controller;
-use Source\Models\Faq\Channel;
+use Source\Models\Category;
 use Source\Models\Faq\Question;
+use Source\Models\Post;
 use Source\Support\Pager;
 
 class Web extends Controller
@@ -26,6 +27,12 @@ class Web extends Controller
      */
     public function home(): void
     {
+        //subindo-ambiente-web-na-amazon-aws-ec2-com-recursos-gratuitos
+        $post = (new Post())->findById(1);
+        $post->views += 1;
+        $post->save();
+        var_dump($post);
+
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
