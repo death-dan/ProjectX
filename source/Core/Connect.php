@@ -23,7 +23,7 @@ class Connect
     /**
      * @return PDO
      */
-    public static function getInstance(): PDO
+    public static function getInstance(): ?PDO
     {
         if (empty(self::$instance)) {
             try {
@@ -35,7 +35,7 @@ class Connect
                 );
     
             } catch (PDOException $e) {
-                die("<h1>Whoopss!!! Erro ao conectar...</h1>");
+                redirect("/ops/problemas");
             }
         }     
 

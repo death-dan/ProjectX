@@ -4,6 +4,7 @@ namespace Source\App;
 
 use League\Plates\Template\Func;
 use League\Plates\Template\Functions;
+use Source\Core\Connect;
 use Source\Core\Controller;
 use Source\Support\Pager;
 
@@ -220,16 +221,35 @@ class Web extends Controller
     public function error(array $data)
     {
         $error = new \stdClass();
-        $error->code = $data['errcode'];
-        $error->title = "Opps. Conteúdo indisponível";
-        $error->message = "Sentímos muito, mas o conteúdo que você tentou acessar não existe, esta indisponível no momento ou foi removido :/";
-        $error->linkTitle = "Continue navegando";
-        $error->link = url_back();
+        
+        switch ($data['errcode']) {
+            case "problemas":
+                $error->code = "OPS";
+                $error->title = "Estamos enfrentando problemas";
+                $error->message = "Parece que nossos serviço não está disponivel no momento. Já estamos vendo isso mas caso percise, envie um e-mail :)";
+                $error->linkTitle = "ENVIAR E-MAIL";
+                $error->link = "mailto:" . CONF_MAIL_SUPPORT;
+                break;
+            case "manutencao": 
+                $error->code = "OPS";
+                $error->title = "Desculpe, estamos em manutenção!";
+                $error->message = "Voltamos logo! Por hora estamos trabalhando para melhorar nosso conteúdo para você controlar suas contas :p";
+                $error->linkTitle = null;
+                $error->link = null;
+                break;
+            default:
+                $error->code = $data['errcode'];
+                $error->title = "Opps. Conteúdo indisponível";
+                $error->message = "Sentímos muito, mas o conteúdo que você tentou acessar não existe, esta indisponível no momento ou foi removido :/";
+                $error->linkTitle = "Continue navegando";
+                $error->link = url_back();
+                break;
+        }
         
         $head = $this->seo->render(
             "{$error->code} {$error->title}",
             $error->message,
-            url_back("/ops/{$error->code}"),
+            url("/ops/{$error->code}"),
             theme("/assets/images/share.jpg"),
             false
         );
