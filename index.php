@@ -30,6 +30,10 @@ $route->get("/entrar", "web:login");
 $route->get("/recuperar", "web:forget");
 $route->get("/cadastrar", "web:register");
 
+//optin
+$route->get("/confirma", "web:confirm");
+$route->get("/obrigado", "web:success");
+
 /** 
  * ERROR ROUTES
  */
