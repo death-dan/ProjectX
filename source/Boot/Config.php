@@ -6,7 +6,7 @@
 define("CONF_DB_HOST", "localhost");
 define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "");
-define("CONF_DB_NAME", "fsphp");
+define("CONF_DB_NAME", "fullstackphp");
 
 /**
  * PROJECT URLs
@@ -65,7 +65,7 @@ define("CONF_MESSAGE_ERROR", "error");
  */
 define("CONF_VIEW_PATH", __DIR__ . "/../../assets/views");
 define("CONF_VIEW_EXT", "php");
-define("CONF_VIEW_THEME", "coffeControl");
+define("CONF_VIEW_THEME", "coffeWeb");
 
 /**
  * UPLOADS
