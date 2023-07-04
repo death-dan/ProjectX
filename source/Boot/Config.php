@@ -55,10 +55,10 @@ define("CONF_PASSWD_OPTION", ["cost" => 10]);
  * MESSAGE
  */
 define("CONF_MESSAGE_CLASS", "trigger");
-define("CONF_MESSAGE_INFO", "info");
-define("CONF_MESSAGE_SUCCESS", "success");
-define("CONF_MESSAGE_WARNING", "warning");
-define("CONF_MESSAGE_ERROR", "error");
+define("CONF_MESSAGE_INFO", "info icon-info");
+define("CONF_MESSAGE_SUCCESS", "success icon-check-square-o");
+define("CONF_MESSAGE_WARNING", "warning icon-warning");
+define("CONF_MESSAGE_ERROR", "error icon-warning");
 
 /**
  * VIEW

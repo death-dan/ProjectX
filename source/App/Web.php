@@ -94,6 +94,51 @@ class Web extends Controller
             "paginator" => $pager->render()
         ]);
     }
+
+    public function blogSearch(array $data): void
+    {
+        if (!empty($data['s'])) {
+            $search = filter_var($data['s'], FILTER_SANITIZE_STRIPPED);
+            echo json_encode(["redirect" => url("/blog/buscar/{$search}/1")]);
+            return;
+        }
+
+        if (empty($data['terms'])) {
+            redirect("/blog");
+        }
+
+        $search = filter_var($data['terms'], FILTER_SANITIZE_STRIPPED);
+        $page = (filter_var($data['page'], FILTER_VALIDATE_INT) >= 1 ? $data['page'] : 1);
+
+        $head = $this->seo->render(
+            "Pesquisa por {$search} - " . CONF_SITE_TITLE,
+            "Confira seus resultados de sua pesquisa para {$search}",
+            url("/blog/buscar/{$search}/{$page}"),
+            theme("/assets/images/share.jpg")
+        );
+
+        $blohSearch = (new Post())->find("(title LIKE :s OR subtitle LIKE :s)", "s=%{$search}%");
+
+        if (!$blohSearch->count()) {
+            echo $this->view->render("blog", [
+                "head" => $head,
+                "title" => "PESQUISA POR:",
+                "search" => $search
+            ]);
+            return;
+        }
+
+        $pager = new Pager(url("/blog/buscar/{$search}/"));
+        $pager->pager($blohSearch->count(), 9, $page);
+
+        echo $this->view->render("blog", [
+            "head" => $head,
+                "title" => "PESQUISA POR:",
+                "search" => $search,
+                "blog" => $blohSearch->limit($pager->limit())->offset($pager->offset())->fetch(true),
+                "paginator" => $pager->render()
+        ]);
+    }
     
     /**
      * blogPost
