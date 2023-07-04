@@ -197,7 +197,7 @@ abstract class Model
         }
     }
 
-    public function count(string $key): int
+    public function count(string $key = "id"): int
     {
         $stmt = Connect::getInstance()->prepare($this->query);
         $stmt->execute($this->params);

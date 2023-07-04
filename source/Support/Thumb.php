@@ -13,7 +13,7 @@ class Thumb
 
     public function __construct()
     {
-        $this->cropper = new Cropper(CONF_IMAGE_CACHE, CONF_IMAGE_QUALITY['jpg'], CONF_IMAGE_QUALITY['jpg']);
+        $this->cropper = new Cropper(CONF_IMAGE_CACHE, CONF_IMAGE_QUALITY['jpg'], CONF_IMAGE_QUALITY['png']);
         $this->uploads = CONF_UPLOAD_DIR;
     }
 

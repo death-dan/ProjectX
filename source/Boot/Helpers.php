@@ -318,7 +318,7 @@ function theme(string $path = null): string
  * @param int|null $height
  * @return string
  */
-function image(string $image, int $width, int $height = null): string
+function image(string $image, int $width, ?int $height = null): string
 {
     return url() . "/" . (new \Source\Support\Thumb())->make($image, $width, $height);
 }
