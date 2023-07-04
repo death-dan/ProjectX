@@ -31,12 +31,14 @@ $route->get("/buscar/{terms}/{page}", "web:blogSearch");
 //auth
 $route->group(null);
 $route->get("/entrar", "web:login");
-$route->get("/recuperar", "web:forget");
 $route->get("/cadastrar", "web:register");
+$route->post("/cadastrar", "web:register");
+$route->get("/recuperar", "web:forget");
+
 
 //optin
 $route->get("/confirma", "web:confirm");
-$route->get("/obrigado", "web:success");
+$route->get("/obrigado/{email}", "web:success");
 
 /** 
  * ERROR ROUTES

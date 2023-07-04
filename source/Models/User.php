@@ -114,6 +114,6 @@ class User extends Model
         }
 
         $this->data = ($this->findById($userId))->data();
-        return $this;   
+        return true;   
     }
 }

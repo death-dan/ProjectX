@@ -23,6 +23,12 @@ define("CONF_SITE_TITLE", "Gerencie suas contas com o melhor coffe ");
 define("CONF_SITE_DESC", "O CoffeControl é um gerenciador de contas simples, poderoso e gratuito.");
 define("CONF_SITE_LANG", "pt-br");
 define("CONF_SITE_DOMAIN", "www.localhost");
+define("CONF_SITE_ADDR_STREET", "SC 406 - Rod. Drº Antônio Luiz Moura Gonzaga");
+define("CONF_SITE_ADDR_NUMBER", "3339");
+define("CONF_SITE_ADDR_COMPLEMENT", "Bloco A, Sala 208");
+define("CONF_SITE_ADDR_CITY", "Florianópolis");
+define("CONF_SITE_ADDR_STATE", "SC");
+define("CONF_SITE_ADDR_ZIPCODE", "88048-301");
 
 /**
  * SOCIAL
@@ -54,7 +60,7 @@ define("CONF_PASSWD_OPTION", ["cost" => 10]);
 /**
  * MESSAGE
  */
-define("CONF_MESSAGE_CLASS", "trigger");
+define("CONF_MESSAGE_CLASS", "message");
 define("CONF_MESSAGE_INFO", "info icon-info");
 define("CONF_MESSAGE_SUCCESS", "success icon-check-square-o");
 define("CONF_MESSAGE_WARNING", "warning icon-warning");

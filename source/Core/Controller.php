@@ -2,6 +2,7 @@
 
 namespace Source\Core;
 
+use Source\Support\Message;
 use Source\Support\Seo;
 
 class Controller
@@ -11,6 +12,9 @@ class Controller
 
     /** @var Seo */
     protected $seo;
+
+    /** @var Message */
+    protected $message;
     
     /**
      * __construct
@@ -22,5 +26,6 @@ class Controller
     {
         $this->view = new View($pathToView);
         $this->seo = new Seo();
+        $this->message = new Message();
     }
 }
