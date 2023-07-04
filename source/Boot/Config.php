@@ -63,14 +63,15 @@ define("CONF_MESSAGE_ERROR", "error");
 /**
  * VIEW
  */
-define("CONF_VIEW_PATH", __DIR__ . "/../../assets/views");
+define("CONF_VIEW_PATH", __DIR__ . "/../../shared/views");
 define("CONF_VIEW_EXT", "php");
 define("CONF_VIEW_THEME", "coffeWeb");
+define("CONF_VIEW_APP", "coffeApp");
 
 /**
  * UPLOADS
  */
-define("CONF_UPLOAD_DIR", "../storage");
+define("CONF_UPLOAD_DIR", "storage");
 define("CONF_UPLOAD_IMAGE_DIR", "images");
 define("CONF_UPLOAD_FILE_DIR", "files");
 define("CONF_UPLOAD_MEDIA_DIR", "medias");

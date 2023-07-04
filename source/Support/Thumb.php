@@ -19,7 +19,7 @@ class Thumb
 
     public function make(string $image, int $width, int $height = null): string
     {
-        return $this->cropper->make($image, $width, $height);
+        return $this->cropper->make("{$this->uploads}/{$image}", $width, $height);
     }
 
     public function flush(string $image = null): void

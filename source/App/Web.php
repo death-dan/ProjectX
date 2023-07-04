@@ -27,12 +27,6 @@ class Web extends Controller
      */
     public function home(): void
     {
-        //subindo-ambiente-web-na-amazon-aws-ec2-com-recursos-gratuitos
-        $post = (new Post())->findById(1);
-        $post->views += 1;
-        $post->save();
-        var_dump($post);
-
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
@@ -42,7 +36,12 @@ class Web extends Controller
 
         echo $this->view->render("home", [
             "head" => $head,
-            "video" => "jGQBmSsunT4"
+            "video" => "jGQBmSsunT4",
+            "blog" => (new Post())
+                ->find()
+                ->order("post_at DESC")
+                ->limit(6)
+                ->fetch(true)
         ]);
     }
     
