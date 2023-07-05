@@ -31,6 +31,7 @@ $route->get("/buscar/{terms}/{page}", "web:blogSearch");
 //auth
 $route->group(null);
 $route->get("/entrar", "web:login");
+$route->post("/entrar", "web:login");
 $route->get("/cadastrar", "web:register");
 $route->post("/cadastrar", "web:register");
 $route->get("/recuperar", "web:forget");
