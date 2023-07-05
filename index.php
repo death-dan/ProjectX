@@ -6,19 +6,19 @@ require __DIR__ . "/vendor/autoload.php";
 /** 
  * BOOTSTRAP
  */
-use Source\Core\Session;
 use CoffeeCode\Router\Router;
+use Source\Core\Session;
 
 $session = new Session();
 $route  = new Router(url(), ":");
+$route->namespace("Source\App");
 
 /** 
  * WEB ROUTES
  */
-$route->namespace("Source\App");
+$route->group(null);
 $route->get("/", "web:home");
 $route->get("/sobre", "web:about");
-$route->get("/termos", "web:terms");
 
 //blog
 $route->group("/blog");
@@ -32,19 +32,35 @@ $route->get("/buscar/{terms}/{page}", "web:blogSearch");
 $route->group(null);
 $route->get("/entrar", "web:login");
 $route->post("/entrar", "web:login");
+
 $route->get("/cadastrar", "web:register");
 $route->post("/cadastrar", "web:register");
+
 $route->get("/recuperar", "web:forget");
 
 
 //optin
+$route->group(null);
 $route->get("/confirma", "web:confirm");
 $route->get("/obrigado/{email}", "web:success");
+
+//serviçes
+$route->group(null);
+$route->get("/termos", "web:terms");
+
+
+/**
+ *  APP
+ */
+$route->group("/app");
+$route->get("/", "App:home");
+$route->get("/sair", "App:logout");
+
 
 /** 
  * ERROR ROUTES
  */
-$route->namespace("Source\App")->group("/ops");
+$route->group("/ops");
 $route->get("/{errcode}", "web:error");
 
 /**
