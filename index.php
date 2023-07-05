@@ -32,11 +32,12 @@ $route->get("/buscar/{terms}/{page}", "web:blogSearch");
 $route->group(null);
 $route->get("/entrar", "web:login");
 $route->post("/entrar", "web:login");
-
 $route->get("/cadastrar", "web:register");
 $route->post("/cadastrar", "web:register");
-
 $route->get("/recuperar", "web:forget");
+$route->post("/recuperar", "web:forget");
+$route->get("/recuperar/{code}", "web:forgetReset");
+$route->post("/recuperar/resetar", "web:forgetReset");
 
 
 //optin

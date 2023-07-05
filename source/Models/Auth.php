@@ -116,4 +116,38 @@ class Auth extends Model
         $this->message->success("Login efetuado com sucesso")->flash();
         return true;
     }
+    
+    /**
+     * forget
+     *
+     * @param  string $email
+     * @return bool
+     */
+    public function forget(string $email): bool
+    {
+        $user = (new User())->findByEmail($email);
+
+        if (!$user) {
+            $this->message->warning("O e-mail informado não está cadastrado");
+            return false;
+        }
+
+        $user->forget = md5(uniqid(rand(), true));
+        $user->safe();
+
+        $view = new View(__DIR__ . "/../../shared/views/email");
+        $message = $view->render("forget", [
+            "first_name" => $user->first_name,
+            "forget_link" => url("/recuperar/{$user->email}|{$user->forget}")
+        ]);
+
+        (new Email())->bootstrap(
+            "Recupere sua senha no " . CONF_SITE_NAME,
+            $message,
+            $user->email,
+            "{$user->first_name} {$user->last_name}"
+        )->send();
+
+        return true;
+    }
 }
