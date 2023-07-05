@@ -74,7 +74,7 @@ class Web extends Controller
     /**
      * blog
      *
-     * @param  mixed $data
+     * @param  null|array $data
      * @return void
      */
     public function blog(?array $data): void
@@ -96,7 +96,13 @@ class Web extends Controller
             "paginator" => $pager->render()
         ]);
     }
-
+    
+    /**
+     * blogSearch
+     *
+     * @param  array $data
+     * @return void
+     */
     public function blogSearch(array $data): void
     {
         if (!empty($data['s'])) {
@@ -268,6 +274,53 @@ class Web extends Controller
         ]);
     }
     
+    /**
+     * reset
+     *
+     * @param  array $data
+     * @return void
+     */
+    public function reset(array $data): void
+    {
+        if (!empty($data['csrf'])) {
+            if (!csrf_verify($data)) {
+                $json['message'] = $this->message->error("Error ao enviar, favor use o formulário")->render();
+                echo json_encode($json);
+                return;
+            }
+
+            if (empty($data['password']) || empty($data['password_re'])) {
+                $json['message'] = $this->message->info("Informe e repita a senha para continuar")->render();
+                echo json_encode($json);
+                return;
+            }
+
+            list($email, $code) = explode("|", $data['code']);
+            $auth = new Auth();
+
+            if ($auth->reset($email, $code, $data['password'], $data['password_re'])) {
+                $this->message->success("Senha alterada com sucesso. Vamos controlar :)")->flash();
+                redirect("/entrar");
+            } else {
+                $json['message'] = $auth->message()->render();
+            }
+
+            echo json_encode($json);
+            return;
+        }
+        
+        $head = $this->seo->render(
+            "Crie sua nova senha " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url("/recuperar"),
+            theme("/assets/images/share.jpg")
+        );
+
+        echo $this->view->render("auth-reset", [
+            "head" => $head,
+            "code" => $data['code']
+        ]);
+    }    
         
     /**
      * register
@@ -380,10 +433,6 @@ class Web extends Controller
         ]);
     }
 
-
-
-
-    
     /**
      * terms
      *
