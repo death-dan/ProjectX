@@ -125,9 +125,9 @@ class Web extends Controller
             theme("/assets/images/share.jpg")
         );
 
-        $blohSearch = (new Post())->find("(title LIKE :s OR subtitle LIKE :s)", "s=%{$search}%");
+        $blogSearch = (new Post())->find("MATCH(title,subtitle) AGAINST(:s)", "s={$search}");
 
-        if (!$blohSearch->count()) {
+        if (!$blogSearch->count()) {
             echo $this->view->render("blog", [
                 "head" => $head,
                 "title" => "PESQUISA POR:",
@@ -137,13 +137,13 @@ class Web extends Controller
         }
 
         $pager = new Pager(url("/blog/buscar/{$search}/"));
-        $pager->pager($blohSearch->count(), 9, $page);
+        $pager->pager($blogSearch->count(), 9, $page);
 
         echo $this->view->render("blog", [
             "head" => $head,
                 "title" => "PESQUISA POR:",
                 "search" => $search,
-                "blog" => $blohSearch->limit($pager->limit())->offset($pager->offset())->fetch(true),
+                "blog" => $blogSearch->limit($pager->limit())->offset($pager->offset())->fetch(true),
                 "paginator" => $pager->render()
         ]);
     }
