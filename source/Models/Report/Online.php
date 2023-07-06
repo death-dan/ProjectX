@@ -38,6 +38,10 @@ class Online extends Model
         return $find->fetch(true);
     }
  
+    /**
+     * @param bool $clear
+     * @return Online
+     */
     public function report(bool $clear = true): Online
     {
         $session = new Session();
@@ -45,14 +49,14 @@ class Online extends Model
         if (!$session->has("online")) {
             $this->user = ($session->authUser ?? null);
             $this->url = (filter_input(INPUT_GET, "route", FILTER_SANITIZE_STRIPPED) ?? "/");
-            $this->ip = filter_input(INPUT_SERVER, "REMOTE_ADDR"); //$_SERVER['REMOTE_ADDR']
-            $this->agent = filter_input(INPUT_SERVER, "HTTP_USER_AGENT"); //$_SERVER['HTTP_USER_AGENT']
+            $this->ip = filter_input(INPUT_SERVER, "REMOTE_ADDR");
+            $this->agent = filter_input(INPUT_SERVER, "HTTP_USER_AGENT");
 
             $this->save();
             $session->set("online", $this->id);
             return $this;
         }
-        
+
         $find = $this->findById($session->online);
         if (!$find) {
             $session->unset("online");
@@ -71,19 +75,20 @@ class Online extends Model
         return $this;
     }
 
-    public function clear(): void
-    {
-        $this->delete("update_at <= NOW() - INTERVAL {$this->sessinonTime} MINUTE", null);
-    }
-    
     /**
-     * save
-     *
+     * CLEAR ONLINE
+     */
+    private function clear()
+    {
+        $this->delete("updated_at <= NOW() - INTERVAL {$this->sessionTime} MINUTE", null);
+    }
+
+    /**
      * @return bool
      */
     public function save(): bool
     {
-        /** UPDATE ACCESS */
+        /** Update Access */
         if (!empty($this->id)) {
             $onlineId = $this->id;
             $this->update($this->safe(), "id = :id", "id={$onlineId}");
@@ -93,7 +98,7 @@ class Online extends Model
             }
         }
 
-        /** CREATE ACCESS */
+        /** Create Access */
         if (empty($this->id)) {
             $onlineId = $this->create($this->safe());
             if ($this->fail()) {
@@ -102,7 +107,7 @@ class Online extends Model
             }
         }
 
-        $this->data = $this->find($onlineId)->data();
+        $this->data = $this->findById($onlineId)->data();
         return true;
     }
 }
