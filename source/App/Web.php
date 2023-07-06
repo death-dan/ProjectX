@@ -483,7 +483,11 @@ class Web extends Controller
                 "desc" => "Bem-vindo(a) ao seu controle de contas, vamos tomar um café?",
                 "image" => theme("/assets/images/optin-success.jpg"),
                 "link" => url("/entrar"),
-                "linkTitle" => "Fazer Login"
+                "linkTitle" => "Fazer Login",
+                "track" => (object)[
+                    "fb" => "Lead",
+                    "aw" => "codigo aw google"
+                ]
             ]
         ]);
     }

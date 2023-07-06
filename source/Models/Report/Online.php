@@ -32,7 +32,7 @@ class Online extends Model
     {
         $find = $this->find("updated_at >= NOW() - INTERVAL {$this->sessionTime} MINUTE");
         if ($count) {
-            return $this->count();
+            return $find->count();
         }
 
         return $find->fetch(true);
