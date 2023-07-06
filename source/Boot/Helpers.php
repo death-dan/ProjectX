@@ -115,6 +115,37 @@ function flash(): ?string
     return null;
 }
 
+/**
+ * request_limit
+ *
+ * @param  mixed $key
+ * @param  mixed $limit
+ * @param  mixed $seconds
+ * @return bool
+ */
+function request_limit(string $key, int $limit, int $seconds = 60): bool
+{
+    $session = new \Source\Core\Session();
+    if ($session->has($key) && $session->$key->time >= time() && $session->$key->requests < $limit) {
+        $session->set($key, [
+            "time" => time() + $seconds,
+            "requests" => $session->$key->requests + 1
+        ]);
+        return false;
+    }
+
+    if ($session->has($key) && $session->$key->time >= time() && $session->$key->requests >= $limit) {
+        return true;
+    }
+
+    $session->set($key, [
+        "time" => time() + $seconds,
+        "requests" => 1
+    ]);
+
+    return false;
+}
+
 
 /**
  * ##################
