@@ -48,7 +48,12 @@ class Access extends Model
         $find->save();
         return $this;
     }
-
+    
+    /**
+     * save
+     *
+     * @return bool
+     */
     public function save(): bool
     {
         /** UPDATE ACCESS */
