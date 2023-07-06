@@ -200,6 +200,17 @@ function str_studly_case(string $string): string
 }
 
 /**
+ * @param string $text
+ * @return string
+ */
+function str_textarea(string $text): string
+{
+    $text = filter_var($text, FILTER_SANITIZE_STRIPPED);
+    $arrayReplace = ["&#10;", "&#10;&#10;", "&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;&#10;"];
+    return "<p>" . str_replace($arrayReplace, "</p><p>", $text . "</p>");
+}
+
+/**
  * str_camel_case
  *
  * @param  mixed $string
@@ -261,6 +272,15 @@ function str_limit_chars(string $string, int $limit, string $pointer = "..."): s
 
     $chars = mb_substr($string, 0, mb_strrpos(mb_substr($string, 0, $limit), " "));
     return "{$chars}{$pointer}";
+}
+
+/**
+ * @param string $price
+ * @return string
+ */
+function str_price(string $price): string
+{
+    return number_format($price, 2, ",", ".");
 }
 
 
@@ -452,11 +472,9 @@ function session(): \Source\Core\Session
 
 
 /**
- * user
- *
- * @return Source\Models\User
+ * @return \Source\Models\User|null
  */
-function user(): \Source\Models\User
+function user(): ?\Source\Models\User
 {
-    return new \Source\Models\User();
+    return \Source\Models\Auth::user();
 }

@@ -1,42 +1,44 @@
 <?php
 if (strpos(url(), "localhost")) {
+
     /**
      * CSS
      */
-    $minCSS = new MatthiasMullie\Minify\CSS();
-    $minCSS->add(__DIR__ . "/../../../shared/styles/styles.css");
-    $minCSS->add(__DIR__ . "/../../../shared/styles/boot.css");
+    $minCss = new MatthiasMullie\Minify\CSS();
+    $minCss->add(__DIR__ . "/../../../shared/styles/styles.css");
+    $minCss->add(__DIR__ . "/../../../shared/styles/boot.css");
 
-    //theme CSS
+    //Theme CSS
     $cssDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/css");
     foreach ($cssDir as $css) {
         $cssFile = __DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/css/{$css}";
         if (is_file($cssFile) && pathinfo($cssFile)['extension'] == "css") {
-            $minCSS->add($cssFile);
+            $minCss->add($cssFile);
         }
     }
 
     //Minify CSS
-    $minCSS->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/style.css");
+    $minCss->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/style.css");
+
 
     /**
      * JS
      */
-    $minJS = new MatthiasMullie\Minify\JS();
-    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.form.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery-ui.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/tracker.js");
+    $minJs = new MatthiasMullie\Minify\JS();
+    $minJs->add(__DIR__ . "/../../../shared/scripts/jquery.min.js");
+    $minJs->add(__DIR__ . "/../../../shared/scripts/jquery.form.js");
+    $minJs->add(__DIR__ . "/../../../shared/scripts/jquery-ui.js");
+    $minJs->add(__DIR__ . "/../../../shared/scripts/tracker.js");
 
-    //theme CSS
+    //Theme JS
     $jsDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/js");
     foreach ($jsDir as $js) {
         $jsFile = __DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/js/{$js}";
         if (is_file($jsFile) && pathinfo($jsFile)['extension'] == "js") {
-            $minJS->add($jsFile);
+            $minJs->add($jsFile);
         }
     }
 
     //Minify JS
-    $minJS->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/scripts.js");
+    $minJs->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/scripts.js");
 }
