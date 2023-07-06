@@ -98,7 +98,7 @@ class Auth extends Model
         $user = (new User())->findByEmail($email);
 
         if (!$user) {
-            $this->message->error("O e-mail informado nã está cadastrado");
+            $this->message->error("O e-mail informado não está cadastrado");
             return false;
         }
 
