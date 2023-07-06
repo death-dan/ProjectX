@@ -52,7 +52,8 @@ $(function () {
     $(".j_collapse").click(function () {
         var collapse = $(this);
 
-        collapse.find(".j_collapse_icon").toggleClass("icon-minus").toggleClass("icon-plus");
+        collapse.parents().find(".j_collapse_icon").removeClass("icon-minus").addClass("icon-plus");
+        collapse.find(".j_collapse_icon").removeClass("icon-plus").addClass("icon-minus");
 
         if (collapse.find(".j_collapse_box").is(":visible")) {
             collapse.find(".j_collapse_box").slideUp(200);
@@ -81,6 +82,8 @@ $(function () {
                 //redirect
                 if (response.redirect) {
                     window.location.href = response.redirect;
+                } else {
+                    load.fadeOut(200);
                 }
 
                 //message
@@ -96,13 +99,10 @@ $(function () {
                 }
             },
             complete: function () {
-                load.fadeOut(200);
-
                 if (form.data("reset") === true) {
                     form.trigger("reset");
                 }
             }
         });
-
-    })
+    });
 });
