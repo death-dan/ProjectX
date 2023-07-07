@@ -8,6 +8,7 @@ use Source\Models\CafeApp\AppInvoice;
 use Source\Models\Report\Access;
 use Source\Models\Report\Online;
 use Source\Models\User;    
+use Source\Models\Post; 
 use Source\Support\Message;
 
 class App extends Controller
@@ -80,13 +81,45 @@ class App extends Controller
                 $chartData->income = implode(",", array_map("abs", $chartIncome));
 
             }
-
-
         //END CHART
+
+        //INVOICES && EXPENSE
+        $invoices = (new AppInvoice())
+            ->find("user_id = :user AND type = 'income' AND status = 'unpaid' AND date(due_at) <= date(now() + INTERVAL 1 MONTH",
+            "user={$this->user->id}")
+            ->order("due_at")
+            ->fetch(true);
+
+        $expense = (new AppInvoice())
+            ->find("user_id = :user AND type = 'expense' AND status = 'unpaid' AND date(due_at) <= date(now() + INTERVAL 1 MONTH",
+            "user={$this->user->id}")
+            ->order("due_at")
+            ->fetch(true);
+        //END INVOICES && EXPENSE
+
+        //WALLET
+        $wallet = (new AppInvoice())->find("user_id = :user AND status = :status",
+            "user={$this->user->id}",
+            "
+                (SELECT SUM(value) FROM app_invoices WHERE user_id = :user AND status = :status AND type = 'income') AS income,
+                (SELECT SUM(value) FROM app_invoices WHERE user_id = :user AND status = :status AND type = 'expense') AS expense
+        ")->fetch();
+
+        if ($wallet) {
+            $wallet->wallet = $wallet->income - $wallet->expense;
+        }
+        //END WALLET
+
+        //POSTS
+        $posts = (new Post())->find()->limit(3)->fetch(true); //->order(due_at DESC)
 
         echo $this->view->render("home", [
             "head" => $head,
-            "chart" => $chartData
+            "chart" => $chartData,
+            "invoices" => $invoices,
+            "expense" => $expense,
+            "wallet" => $wallet,
+            "posts" => $posts
         ]);
     }
 
